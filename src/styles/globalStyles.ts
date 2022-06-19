@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     border: 0;
-    font: inherit;
+    /* font: inherit; */
     vertical-align: baseline;
   }
 
