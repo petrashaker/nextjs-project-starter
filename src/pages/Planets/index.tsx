@@ -10,18 +10,18 @@ const Planets: NextPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
  
-    const handleData =  () => {
+    const handleData = async () => {
         setIsLoading(true);
-         fetch('https://swapi.dev/api/planets')
-            .then(response => response.json())
-            .then(response => {
-                setIsLoading(false)
-                return setData(response.results);
-            })
-            .catch(() => {
-                setErrorMessage("Unable to fetch planets data");
-                setIsLoading(false);
-            });
+        try {
+            const response = await fetch('https://swapi.dev/api/planets');
+            const data = await response.json();
+            setIsLoading(false);
+            return setData(data.results);
+        } catch(err) {
+            setIsLoading(false);
+            setErrorMessage("Unable to fetch planets data");
+            throw new Error(`HTTP error! status: ${err}`);
+        } 
     }
     
     interface Provider {
